@@ -1,25 +1,34 @@
-def prod(num):
-	prd = 1
-	while num:
-		prd *=num%10
+def digits(num):
+	d = 0
+	if num==0:
+		return 1
+	while num!=0:
 		num = num/10
-	if prd > 10:
-		return prod(prd)
-	else:
-		return prd
+		d+=1
+	return d
+def digi_prod(num):
+	prod = 1
+	while num:
+		prod*=num%10
+		num = num/10
+	return prod
+		
 def colorful(num):
-	setN = {}
-	snum = str(num)
-	print prod(num)
-	for i in range(len(str(num))):
-		for j in range(i, len(str(num))):
-			n = int(snum[i:j+1])
-			prd = prod(n)
-			if prd in setN:
-				print setN
+	n = digits(num)
+	onum = num
+	i = n
+	prods = []
+	while i>=1:
+		num = onum%pow(10,i)
+		while num:
+			if digi_prod(num) in prods:
 				return 0
 			else:
-				setN[prd] = n
-	
+				prods.append(digi_prod(num))
+			num = num/10
+		i-=1
 	return 1
-print colorful(234)
+print colorful(3245)
+print colorful(0)
+print colorful(1)
+print colorful(23)
